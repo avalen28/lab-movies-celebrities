@@ -1,1 +1,17 @@
-<h1>prueba new-movie</h1>
+<h2>new movie</h2>
+
+<form action="/movies/create" method="post">
+  <label>Title</label>
+  <input type="text" name="title" placeholder="Movie name" /><br />
+  <label>Genre</label>
+  <input type="text" name="genre" placeholder="Terror...commedy...?" /><br />
+  <label>Plot</label>
+  <input type="text" name="plot" placeholder="plot or history" /><br />
+  <label>Our celebrities</label>
+  <select name="cast" multiple>
+    {{#each celebritiesFromDB}}
+      <option value="{{_id}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <button type="submit">Save!</button>
+</form>

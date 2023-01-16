@@ -1,1 +1,21 @@
-<h1>prueba movie</h1>
+<h1>Movies in our DB!</h1>
+{{#if moviesFromDB}}
+  {{#each moviesFromDB}}
+    <h3>{{title}}</h3>
+    <h3>{{genre}}</h3>
+    <h3>{{plot}}</h3>
+    <div>
+      <h3>Cast</h3>
+      <ul>
+        {{#each cast}}
+          <li>{{name}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+  {{/each}}
+{{else}}
+  <h2>No celebrities on our DB!</h2>
+{{/if}}
+
+{{! Hay que dejar aquí solamente los títulos. El resto es para el detalle. FLIPAO }}
