@@ -1,7 +1,10 @@
-<h1>celebritie's home</h1>
-
-{{#each celebritiesFromDB}}
-  <h3>{{name}}</h3>
-  <h3>{{occupation}}</h3>
-  <h3>{{catchPhrase}}</h3>
-{{/each}}
+<h1>celebrities home</h1>
+{{#if celebritiesFromDB}}
+  {{#each celebritiesFromDB}}
+    <h3>{{name}}</h3>
+    <h3>{{occupation}}</h3>
+    <h3>{{catchPhrase}}</h3>
+  {{/each}}
+{{else}}
+  <h2>No celebrities on our DB!</h2>
+{{/if}}
