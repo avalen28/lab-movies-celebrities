@@ -82,26 +82,24 @@ router.get("/:movieId/edit", async (req, res, next) => {
 
 router.post("/:id/edit", async (req, res, next) => {
   const { id } = req.params;
-  console.log(movieId);
   const { title, genre, plot, cast } = req.body;
   try {
-    const { title, genre, plot, cast } = req.body;
     if (typeof cast === "string") {
-      Movie.findByIdAndUpdate(id, {
+      await Movie.findByIdAndUpdate(id, {
         title,
         genre,
         plot,
         cast: [cast],
       });
     } else {
-      Movie.findByIdAndUpdate(id, {
+      await Movie.findByIdAndUpdate(id, {
         title,
         genre,
         plot,
         cast: cast,
       });
     }
-    res.redirect("/movies/:movieId");
+    res.redirect(`/movies/${id}`);
   } catch (err) {
     console.log(err);
   }
