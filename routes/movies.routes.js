@@ -7,8 +7,8 @@ const router = express.Router();
 // all your routes here
 router.get("/", async (req, res, next) => {
   try {
-    const moviesFromDB = await Movie.find({}).populate("cast");
-    console.log(moviesFromDB);
+    const moviesFromDB = await Movie.find({}); //.populate("cast") para sacar las celeb.
+
     res.render("movies/all-movies", { moviesFromDB });
   } catch (err) {
     console.log(err);
@@ -44,6 +44,16 @@ router.post("/create", async (req, res, next) => {
       });
     }
     res.redirect("/movies");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/:movieId", async (req, res, next) => {
+  const { movieId } = req.params;
+  try {
+    const dataFromDB = await Movie.findById(movieId).populate("cast");
+    res.render("movies/movie-details", { dataFromDB });
   } catch (err) {
     console.log(err);
   }
