@@ -1,19 +1,20 @@
 <h1>prueba movie detalls</h1>
 
-{{#if moviesFromDB}}
-  <h3>{{title}}</h3>
-  <h3>{{genre}}</h3>
-  <h3>{{plot}}</h3>
-  <div>
-    <h3>Cast</h3>
-    <ul>
-      {{#each cast}}
-        <li>{{name}}</li>
-        <li>{{occupation}}</li>
-        <li>{{catchPhrase}}</li>
-      {{/each}}
-    </ul>
-  </div>
-{{else}}
-  <h2>No celebrities on our DB!</h2>
-{{/if}}
+<h3>{{title}}</h3>
+<h2>patata</h2>
+<h3>{{genre}}</h3>
+<h3>{{plot}}</h3>
+<div>
+  <h3>Cast</h3>
+  <ul>
+    {{#each cast}}
+      <li>{{name}}</li>
+      <li>{{occupation}}</li>
+      <li>{{catchPhrase}}</li>
+    {{/each}}
+  </ul>
+</div>
+<form action="/movies/{{_id}}/delete" method="post">
+  <button type="submit">Delete!</button>
+</form>
+<a href="/movies/{{_id}}/edit">Edit!</a>

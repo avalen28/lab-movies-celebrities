@@ -52,8 +52,56 @@ router.post("/create", async (req, res, next) => {
 router.get("/:movieId", async (req, res, next) => {
   const { movieId } = req.params;
   try {
-    const dataFromDB = await Movie.findById(movieId).populate("cast");
-    res.render("movies/movie-details", { dataFromDB });
+    const movieFromDB = await Movie.findById(movieId).populate("cast");
+    res.render("movies/movie-details", movieFromDB);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/:movieId/delete", async (req, res, next) => {
+  const { movieId } = req.params;
+  try {
+    const movieFromDB = await Movie.findByIdAndRemove(movieId);
+    res.redirect("/movies");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/:movieId/edit", async (req, res, next) => {
+  const { movieId } = req.params;
+  try {
+    const movieFromDB = await Movie.findById(movieId);
+    const celebritiesFromDB = await Celebrity.find({});
+    res.render("movies/edit-movie", { movieFromDB, celebritiesFromDB });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/:id/edit", async (req, res, next) => {
+  const { id } = req.params;
+  console.log(movieId);
+  const { title, genre, plot, cast } = req.body;
+  try {
+    const { title, genre, plot, cast } = req.body;
+    if (typeof cast === "string") {
+      Movie.findByIdAndUpdate(id, {
+        title,
+        genre,
+        plot,
+        cast: [cast],
+      });
+    } else {
+      Movie.findByIdAndUpdate(id, {
+        title,
+        genre,
+        plot,
+        cast: cast,
+      });
+    }
+    res.redirect("/movies/:movieId");
   } catch (err) {
     console.log(err);
   }

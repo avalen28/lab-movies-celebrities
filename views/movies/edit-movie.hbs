@@ -1,1 +1,16 @@
 <h1>prueba movie-edit</h1>
+
+<form action="/movies/{{movieFromDB._id}}/edit" method="post">
+  <label>Title</label>
+  <input type="text" name="title" value={{movieFromDB.title}} /><br />
+  <label>Genre</label>
+  <input type="text" name="genre" value={{movieFromDB.genre}} /><br />
+  <label>Plot</label>
+  <input type="text" name="plot" value={{movieFromDB.plot}} /><br />
+  <select name="cast" multiple>
+    {{#each celebritiesFromDB}}
+      <option value="{{_id}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <button type="submit">Send!</button>
+</form>
